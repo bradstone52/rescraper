@@ -6,6 +6,8 @@ class ColliersSpider(scrapy.Spider):
     name = 'colliers'
 
     base_url = 'https://www.collierscanada.com'
+
+    
     
     def start_requests(self):
         url = 'https://www.collierscanada.com/en-ca/properties'
@@ -19,6 +21,7 @@ class ColliersSpider(scrapy.Spider):
             absolute_url = self.base_url + link
             yield SplashRequest(url=absolute_url, callback=self.parse_details, args={'wait': 5})
 
+        
     def parse_details(self, response):
         yield {
             "Address": response.xpath("//h2[@class='property-address']/text()").get(),
